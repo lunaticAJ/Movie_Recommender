@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Movie Recommender</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<style>
+			.movie {
+				color: #fff;
+				margin-left: auto;
+				margin-right: auto;
+				resize: none;
+			}
+
+			.btn-block {
+				width: 15%;
+				text-align: center;
+				margin-left: auto;
+				margin-right: auto;
+				color: #e4e0e0;
+			}
+
+			#content {
+				z-index: 0;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+			.ml-container {
+				z-index: 0;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100vh;
+				background-image: url("../static/sunset_-_65182 (Original).gif");
+				background-size: 100%;
+				background-position: center center;
+				background-color: rgba(255, 255, 255, 1);
+				background-repeat: no-repeat;
+				-webkit-transition: background-image 0.4s ease-in-out;
+				transition: background-image 0.4s ease-in-out;
+			}
+
+			.card {
+				cursor: pointer;
+			}
+
+			h1 {
+				font-family: Segoe;
+				color: #34c6ff;
+				font-size: 50px;
+				font-style: normal;
+				font-variant: small-caps;
+				font-weight: 700;
+				line-height: 40px;
+				text-shadow: 2px 2px 0px #bd5f18;
+			}
+
+			h4 {
+				font-family: Segoe;
+				color: #34c6ff;
+				font-size: 20px;
+				font-style: normal;
+				font-variant: small-caps;
+				font-weight: 700;
+				line-height: 20px;
+				text-shadow: 1px 1px 0px #000000;
+			}
+
+			#loader {
+				position: fixed;
+				z-index: 100;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-image: url("../static/7.gif");
+				background-size: 45%;
+				background-position: 50% 50%;
+				background-color: rgba(255, 255, 255, 1);
+				background-repeat: no-repeat;
+				-webkit-transition: background-image 0.4s ease-in-out;
+				transition: background-image 0.4s ease-in-out;
+			}
+
+			#loader-text {
+				vertical-align: middle;
+				color: white;
+			}
+		</style>
+		<script type="text/javascript" src="{{url_for('static', filename='content.js')}}"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+	</head>
+	<body id="content" style="font-family: 'Noto Sans JP', sans-serif;">
+		<div id="block" class="ml-container" style="display: block;">
+			<br>
+			<center>
+				<h1> ——— Movie Recommender ——— </h1>
+			</center>
+			<br>
+			<br>
+			<center>
+				<h4> Enter Movie Name </h4>
+			</center>
+			<center>
+				<form action="{{ url_for('recommend')}}">
+					<div class="form-group shadow-textarea" style="margin-top: 30px;text-align: center;color: white;">
+						<input type="text" name="movie" class="movie form-control" autocomplete="off" placeholder="Enter the Movie Name" style="background-color: #ffffff;border-color:#ffffff;width: 60%;color: #181818" />
+						<br>
+						<center>
+							<h4> Select Your Recommendation Type </h4>
+						</center>
+						<br>
+						<select name="classifier" id="" class="movie form-control" style="background-color: #ffffff;border-color:#ffffff;width: 60%;color: #181818">
+							<option value="1">Overall Recommendation</option>
+							<option value="2">Genre-Based Recommendation</option>
+							<option value="3">Cast-Based Recommendation</option>
+						</select>
+						<br>
+					</div>
+					<br>
+					<div class="form-group" style="text-align: center;">
+						<button onClick="enter()" type="submit" class="btn btn-primary btn-block" style="background-color: #000000;text-align: center;border-color: #ffffff;width:120px;">Enter</button>
+						<br>
+						<br>
+					</div>
+				</form>
+			</center>
+			<div id="loader" class="text-center" style="display: none;"></div>
+		</div>
+		<div class="results"> {% block content %} {% endblock %} </div>
+	</body>
+	<script>
+		function enter() {
+			document.getElementById("loader").style.display = 'block';
+			document.getElementById("block").style.height = '50%';
+		}
+	</script>
+</html>
