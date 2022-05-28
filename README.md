@@ -12,7 +12,7 @@ Check out the live demo: [movie-recommender](https://movie-recommender0291.herok
 
 ## Basic working of the system
 
- ![image](.\static\Flowchart.png)
+ ![image](https://raw.githubusercontent.com/lunaticAJ/Movie_Recommender/master/static/Flowchart.png)
 
 ### a.) Data Preprocessing
 
